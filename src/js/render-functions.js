@@ -1,45 +1,46 @@
+export function createMarkup(images) {
+  if (!Array.isArray(images) || images.length === 0) {
+    console.error('Invalid or empty data for createMarkup.');
+    return '';
+  }
 
-
-function createMarkup (arr) {
-    return arr.map((item) => `
-<li class='gallery-item'>
-    <a href='${item.largeImageUrl}'>
-      <img class='img' src='${item.webformatUrl}' alt='${item.tags}'/>
-    </a>
-    <div class='card'>
-      <p class='item-info'>Likes<span>${item.likes}</span></p>
-      <p class='item-info'>Views<span>${item.views}</span></p>
-      <p class='item-info'>Comments<span>${item.comments}</span></p>
-      <p class='item-info'>Downloads<span>${item.downloads}</span></p>
-    </div>
-</li>
-    `).join('')
+  return images
+    .map(
+      ({
+        id,
+        largeImageURL,
+        webformatURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => `
+    <li class='item-gallery' data-id='${id}'>
+      <a class='link-gallery' href='${largeImageURL}'>
+        <img 
+          class='img-gallery'
+          src='${webformatURL}'
+          alt='${tags}'
+          loading="lazy"
+        >
+        <ul>
+          <li class='info-img'><span>Likes</span>${likes}</li>
+          <li class='info-img'><span>Views</span>${views}</li>
+          <li class='info-img'><span>Comments</span>${comments}</li>
+          <li class='info-img'><span>Downloads</span>${downloads}</li>
+        </ul>
+      </a>
+    </li>
+    `
+    )
+    .join('');
 }
-export default createMarkup;
 
+export function showLoadingMessage(load) {
+  load.style.display = 'block';
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export function hideLoadingMessage(load) {
+  load.style.display = 'none';
+}
