@@ -69,5 +69,6 @@ function handleSubmit(event) {
         message:
           'Sorry, there are no images matching your search query. Please try again!',
       });
+      hideLoadingMessage(load);
     });
 }
